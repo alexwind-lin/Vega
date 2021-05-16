@@ -8,12 +8,12 @@
 import Foundation
 
 public class ActionModel<Input, Output> {
-    let property: ActionProperty
-    let inputType: ActionInput
-    let outputType: ActionOutput
+    public let property: ActionProperty
+    public let inputType: ActionInput
+    public let outputType: ActionOutput
     
-    var input: Input!
-    var callback: ((Result<Output, Error>) -> Void)?
+    public var input: Input!
+    public var callback: ((Result<Output, Error>) -> Void)?
     
     public init(annotation: ActionAnnotation<Input, Output>) {
         self.property = annotation.actionModel

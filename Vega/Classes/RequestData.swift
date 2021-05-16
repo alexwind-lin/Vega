@@ -8,22 +8,27 @@
 import Foundation
 
 public class RequestData {
-    var baseUrl: String = ""
-    var path: String = ""
-    var httpMethod: String = "get"
-    var httpHeaders: [String: String] = [:]
-    var parameters: [String: String] = [:]
-    var body: Data?
-    var timeout: TimeInterval?
+    public var baseUrl: String = ""
+    public var path: String = ""
+    public var httpMethod: String = "get"
+    public var httpHeaders: [String: String] = [:]
+    public var parameters: [String: String] = [:]
+    public var body: Data?
+    public var timeout: TimeInterval?
+    
+    public init() {
+    }
 }
 
 // MARK: - Add Header
 public extension RequestData {
+    @discardableResult
     func addHttpHeader(value: String, key: String) -> Self {
         httpHeaders[key] = value
         return self
     }
     
+    @discardableResult
     func addHttpHeaders(_ header: [String: String]) -> Self {
         header.forEach { key, value in
             httpHeaders[key] = value

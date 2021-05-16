@@ -11,6 +11,9 @@ public class ResponseData {
     public var response: HTTPURLResponse?
     public var data: Data?
     public var error: Error?
+    
+    public init() {
+    }
 }
 
 public extension ResponseData {
