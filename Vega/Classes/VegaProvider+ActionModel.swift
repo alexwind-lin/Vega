@@ -34,26 +34,18 @@ extension VegaProvider {
 }
 
 // MARK: - 将泛型降级到具体Encodable/Decodable
-// 利用init来做点trick
 fileprivate extension Encodable {
-    init?<Input, Output>(from action: ActionModel<Input, Output>, converter: EncodableRequestConverter, completion: (RequestData) -> Void) {
+    static func convert<Input, Output>(action: ActionModel<Input, Output>, using converter: EncodableRequestConverter) -> RequestData {
         let transformed = action as! ActionModel<Self, Output>
-        let data = converter.convert(action: transformed)
-        completion(data)
-        return nil
+        return converter.convert(action: transformed)
     }
 }
 
 fileprivate extension Decodable {
-    init<Input, Output>(from action: ActionModel<Input, Output>, responseData: ResponseData, converter: DecodableResponseConverter) throws {
+    static func convert<Input, Output>(action: ActionModel<Input, Output>, responseData: ResponseData, using converter: DecodableResponseConverter) -> Result<Output, Error> {
         let transformed = action as! ActionModel<Input, Self>
         let data = converter.convert(action: transformed, responseData: responseData)
-        switch data {
-        case .failure(let error):
-            throw error
-        case .success(let result):
-            self = result
-        }
+        return data as! Result<Output, Error>
     }
 }
 // MARK: - End: 将泛型降级到具体Encodable/Decodable
@@ -70,11 +62,8 @@ fileprivate extension ActionModel {
                 fatalError("\(Input.self) is not encodable!!")
             }
             
-            var requestData: RequestData?
-            let _ = encodableType.init(from: self, converter: converter) { data in
-                requestData = data
-            }
-            return requestData!
+            let requestData = encodableType.convert(action: self, using: converter)
+            return requestData
         case .full(let converter):
             return converter.convert(action: self)
         }
@@ -91,12 +80,7 @@ fileprivate extension ActionModel {
                 fatalError("\(Output.self) is not decodable!!")
             }
             
-            do {
-                let result = try decodableType.init(from: self, responseData: responseData, converter: converter) as! Output
-                return .success(result)
-            } catch let error {
-                return .failure(error)
-            }
+            return decodableType.convert(action: self, responseData: responseData, using: converter)
         case .full(let converter):
             return converter.convert(action: self, responseData: responseData)
         }
