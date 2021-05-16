@@ -17,12 +17,11 @@ public struct Vega {
     // Builder
     public class Builder {
         private let identifier: VegaProviderIdentifier
-        private let baseUrl: String?
-        public init(_ identifier: VegaProviderIdentifier, baseUrl: String? = nil) {
+        public init(_ identifier: VegaProviderIdentifier = "") {
             self.identifier = identifier
-            self.baseUrl = baseUrl
         }
-        
+
+        private var baseUrl: String?
         private var httpClient: HTTPClient?
         private var converter: DataFactory?
         private var requestInterceptors: [RequestInterceptor] = []
@@ -31,6 +30,10 @@ public struct Vega {
 }
 
 public extension Vega.Builder {
+    func setBaseURL(_ baseUrl: String) -> Self {
+        self.baseUrl = baseUrl
+        return self
+    }
     func setHTTPClient(_ httpClient: HTTPClient) -> Self {
         self.httpClient = httpClient
         return self
