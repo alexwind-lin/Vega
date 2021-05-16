@@ -1,5 +1,5 @@
 PODS:
-  - SweetSugar (1.0.0)
+  - SweetSugar (1.0.1)
   - Vega (0.1.0):
     - SweetSugar
 
@@ -15,11 +15,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SweetSugar:
-    :commit: 82a860957c74bd40532636975b6f76a397f510f4
+    :commit: f1d9980f5d1532a7e3fe36880b4b290dec30e071
     :git: https://github.com/alexwind-lin/SweetSugar.git
 
 SPEC CHECKSUMS:
-  SweetSugar: ae65d779425de2a94c869b11c8ea57392bc0bc58
+  SweetSugar: 6fe7fbbe970ede6939ff0b5f7783eb0cbcae00c1
   Vega: d7de05425dafb3fb086bfe5f1497bbf6b2bf53bb
 
 PODFILE CHECKSUM: c5730955671075a0b50776e3353e6715a7b62c58

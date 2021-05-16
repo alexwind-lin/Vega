@@ -45,7 +45,7 @@ public extension ActionModel {
         requestData.httpHeaders = property.httpHeaders ?? [:]
         
         if (property.httpMethod == "get") {
-            requestData.parameters = Mirror.descibeObjectAsKeyValue(self.input!)
+            requestData.parameters = Mirror.describeObjectAsKeyValue(self.input!)
         } else if (property.httpMethod == "post") {
             requestData.body = self.inputType.encode(self.input!)
         }

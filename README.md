@@ -12,7 +12,7 @@ Vega is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'Vega'
+pod 'Vega', :git=> 'https://github.com/alexwind-lin/Vega.git'
 ```
 
 ## License
