@@ -1,34 +1,18 @@
 //
-//  ActionModel.swift
-//  TestN
+//  ActionProperty.swift
+//  Vega
 //
-//  Created by kensou on 2021/4/16.
+//  Created by kensou on 2021/5/29.
 //
 
 import Foundation
 
-public class ActionPropertyHolder {
-    public var baseUrl: String?
-    public var path: String
-    public var httpMethod: String?
-    public var timeout: TimeInterval?
-    public var httpHeaders: [String: String]?
-    public var provider: VegaProviderIdentifier?
-    public var userInfo: [String: Any] = [:]
-    
-    public init(_ path: String,
-         baseUrl: String? = nil,
-         httpMethod: String? = nil,
-         timeout: TimeInterval? = nil,
-         httpHeaders: [String: String]? = nil,
-         provider: VegaProviderIdentifier? = nil
-         ) {
-        
-        self.path = path
-        self.timeout = timeout
-        self.baseUrl = nil
-        self.httpMethod = httpMethod
-        self.httpHeaders = httpHeaders
-        self.provider = provider
-    }
+public enum ActionProperty {
+    case baseUrl(String)
+    case path(String)
+    case httpMethod(String)
+    case timeout(TimeInterval)
+    case httpHeaders([String: String])
+    case provider(VegaProviderIdentifier)
+    case custom(_ key: String, _ value: Any)
 }
