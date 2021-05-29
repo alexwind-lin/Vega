@@ -8,16 +8,16 @@
 import Foundation
 
 public class BaseAnnotation {
-    let actionModel: ActionProperty
+    let propertyModel: ActionPropertyModel
     let inputType: ActionInput
     let outputType: ActionOutput
     
     public convenience init(_ path: String, input: ActionInput = .encodable, output: ActionOutput = .decodable) {
-        self.init(ActionProperty(path), input: input, output: output)
+        self.init([.path(path)], input: input, output: output)
     }
     
-    public init(_ actionModel: ActionProperty, input: ActionInput = .encodable, output: ActionOutput = .decodable) {
-        self.actionModel = actionModel
+    public init(_ properties: [ActionProperty], input: ActionInput = .encodable, output: ActionOutput = .decodable) {
+        self.propertyModel = .init(with: properties)
         self.inputType = input
         self.outputType = output
         

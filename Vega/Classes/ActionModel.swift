@@ -8,7 +8,7 @@
 import Foundation
 
 public class ActionModel<Input, Output> {
-    public let property: ActionProperty
+    public let property: ActionPropertyModel
     public let inputType: ActionInput
     public let outputType: ActionOutput
     
@@ -16,7 +16,7 @@ public class ActionModel<Input, Output> {
     public var callback: ((Result<Output, Error>) -> Void)?
     
     public init(annotation: ActionAnnotation<Input, Output>) {
-        self.property = annotation.actionModel
+        self.property = annotation.propertyModel
         self.inputType = annotation.inputType
         self.outputType = annotation.outputType
     }
@@ -40,9 +40,9 @@ public extension ActionModel {
         
         requestData.baseUrl = property.baseUrl ?? ""
         requestData.path = property.path
-        requestData.httpMethod = (property.httpMethod ?? "get").lowercased()
+        requestData.httpMethod = property.httpMethod
         requestData.timeout = property.timeout
-        requestData.httpHeaders = property.httpHeaders ?? [:]
+        requestData.httpHeaders = property.httpHeaders
         
         if (property.httpMethod == "get") {
             requestData.parameters = Mirror.describeObjectAsKeyValue(self.input!)

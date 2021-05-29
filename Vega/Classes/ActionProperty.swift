@@ -7,13 +7,14 @@
 
 import Foundation
 
-public class ActionProperty {
+public class ActionPropertyHolder {
     public var baseUrl: String?
     public var path: String
     public var httpMethod: String?
     public var timeout: TimeInterval?
     public var httpHeaders: [String: String]?
     public var provider: VegaProviderIdentifier?
+    public var userInfo: [String: Any] = [:]
     
     public init(_ path: String,
          baseUrl: String? = nil,
