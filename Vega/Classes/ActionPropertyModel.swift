@@ -8,7 +8,7 @@
 import Foundation
 
 public class ActionPropertyModel {
-    public var baseUrl: String?
+    public var baseUrl: String = ""
     public var path: String = ""
     public var httpMethod: String = "get"
     public var timeout: TimeInterval?
@@ -34,7 +34,29 @@ public class ActionPropertyModel {
             case .custom(let key, let value):
                 self.userInfo[key] = value
             }
-            
         }
+        
+        if self.baseUrl.isEmpty {
+            self.baseUrl = self.provider.provider.baseUrl ?? ""
+        }
+    }
+}
+
+extension ActionPropertyModel {
+    func isGetHTTPMethod() -> Bool {
+        return self.httpMethod == "get"
+    }
+}
+
+extension ActionPropertyModel {
+    func getRequestData() -> RequestData {
+        let requestData = RequestData()
+        
+        requestData.baseUrl = baseUrl
+        requestData.path = path
+        requestData.httpMethod = httpMethod
+        requestData.timeout = timeout
+        requestData.httpHeaders = httpHeaders
+        return requestData
     }
 }

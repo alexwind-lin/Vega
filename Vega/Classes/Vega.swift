@@ -23,7 +23,7 @@ public struct Vega {
 
         private var baseUrl: String?
         private var httpClient: HTTPClient?
-        private var converter: DataFactory?
+        private var converter: DataConverter?
         private var requestInterceptors: [RequestInterceptor] = []
         private var responseInterceptors: [ResponseInterceptor] = []
     }
@@ -40,12 +40,7 @@ public extension Vega.Builder {
     }
     
     func setConverter(_ converter: DataConverter) -> Self {
-        self.converter = .full(converter)
-        return self
-    }
-    
-    func setConverter(_ converter: CodableDataConverter) -> Self {
-        self.converter = .codable(converter)
+        self.converter = converter
         return self
     }
     
@@ -60,7 +55,7 @@ public extension Vega.Builder {
     }
     
     func build() {
-        let provider = DefaultVegaProvider(identifier: identifier, baseUrl: baseUrl, httpClient: httpClient ?? DefaultHTTPClient(), converter: converter ?? .full(DefaultJSONConverter()), requestInterceptors: requestInterceptors, responseInterceptors: responseInterceptors)
+        let provider = DefaultVegaProvider(identifier: identifier, baseUrl: baseUrl, httpClient: httpClient ?? DefaultHTTPClient(), converter: converter ?? DefaultJSONConverter(), requestInterceptors: requestInterceptors, responseInterceptors: responseInterceptors)
         Vega.regist(provider)
     }
 }
