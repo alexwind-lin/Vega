@@ -17,13 +17,13 @@ extension VegaProvider {
     func enqueue<Input, Output>(action: ActionModel<Input, Output>, completion: ((Result<Output, Error>) -> Void)?) {
         var requestData = converter.convert(action: action)
         requestInterceptors.forEach { (interceptor) in
-            requestData = interceptor(requestData)
+            requestData = interceptor.process(requestData)
         }
         let responseInterceptor = responseInterceptors
         httpClient.performRequest(requestData) { (responseData) in
             var data = responseData
             responseInterceptor.forEach({ (interceptor) in
-                data = interceptor(data)
+                data = interceptor.process(data)
             })
             let result = converter.convert(action: action, responseData: data)
             completion?(result)

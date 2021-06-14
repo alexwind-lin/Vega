@@ -7,5 +7,10 @@
 
 import Foundation
 
-public typealias RequestInterceptor = (_ data: RequestData) -> RequestData
-public typealias ResponseInterceptor = (_ data: ResponseData) -> ResponseData
+public protocol RequestInterceptor {
+    func process(_ data: RequestData) -> RequestData
+}
+
+public protocol ResponseInterceptor {
+    func process(_ data: ResponseData) -> ResponseData
+}

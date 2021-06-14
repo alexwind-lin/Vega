@@ -44,12 +44,12 @@ public extension Vega.Builder {
         return self
     }
     
-    func addRequestInterceptor(_ interceptor: @escaping RequestInterceptor) -> Self {
+    func addRequestInterceptor(_ interceptor: RequestInterceptor) -> Self {
         self.requestInterceptors.append(interceptor)
         return self
     }
     
-    func addResponseInterceptor(_ interceptor: @escaping ResponseInterceptor) -> Self {
+    func addResponseInterceptor(_ interceptor: ResponseInterceptor) -> Self {
         self.responseInterceptors.append(interceptor)
         return self
     }
