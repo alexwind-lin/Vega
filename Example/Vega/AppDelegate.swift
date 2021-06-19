@@ -9,36 +9,61 @@
 import UIKit
 import Vega
 
-struct NetAPI {
-    @GET("https://api.hitokoto.cn")
-    static var hitokoto: ActionModel<HKRequest, HKResponse>
-}
-
-struct HKRequest {
-    var charset: String = "utf8"
-    var encode: String = "json"
-}
-
-struct HKResponse: Codable {
-    var hitokoto: String
-    var from_who: String?
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        Vega.Builder("").build()
         
-        let request = HKRequest()
-        NetAPI.hitokoto.request(request) { (result) in
+        buildSimpleVega()
+        requestHitoKoto()
+
+        buildComplexVega()
+        customExample()
+        
+        return true
+    }
+    
+    private func buildSimpleVega() {
+        Vega.builder().build()
+    }
+    
+    private func buildComplexVega() {
+        Vega.builder("FakeOne")
+            .setBaseURL("https://hahahahahaha.com")
+            .addRequestInterceptor(FakeRequestInterceptor())
+            .addResponseInterceptor(FakeResponseInterceptor())
+            .setHTTPClient(FakeHTTPClient())
+            .setConverter(CustomDataConverter())
+            .build()        
+    }
+    
+    private func requestAppleRepositories() {
+        GitHubAPI.appleRepositories.request { (result) in
+            switch result {
+            case .failure(let error):
+                break
+            case .success(let list):
+                break
+            }
+        }
+    }
+    
+    private func requestHitoKoto() {
+        HitokotoAPI.hitokoto.request("d") { (result) in
             print(result)
         }
-        return true
+    }
+    
+    private func customExample() {
+        let dict = [
+            "hello": "world"
+        ]
+        FakeHitoKotoAPI.fakeHitoKoto.request(dict) { (result) in
+            print(result)
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -13,23 +13,29 @@ public struct Vega {
     static func regist(_ provider: VegaProvider) {
         providerList.append(provider)
     }
+}
 
-    // Builder
-    public class Builder {
-        private let identifier: VegaProviderIdentifier
-        public init(_ identifier: VegaProviderIdentifier = "") {
-            self.identifier = identifier
-        }
-
-        private var baseUrl: String?
-        private var httpClient: HTTPClient?
-        private var converter: DataConverter?
-        private var requestInterceptors: [RequestInterceptor] = []
-        private var responseInterceptors: [ResponseInterceptor] = []
+public extension Vega {
+    static public func builder(_ identifier: VegaProviderIdentifier = "") -> VegaBuilder {
+        return VegaBuilder(identifier)
     }
 }
 
-public extension Vega.Builder {
+// Builder
+public class VegaBuilder {
+    private let identifier: VegaProviderIdentifier
+    public init(_ identifier: VegaProviderIdentifier = "") {
+        self.identifier = identifier
+    }
+
+    private var baseUrl: String?
+    private var httpClient: HTTPClient?
+    private var converter: DataConverter?
+    private var requestInterceptors: [RequestInterceptor] = []
+    private var responseInterceptors: [ResponseInterceptor] = []
+}
+
+public extension VegaBuilder {
     func setBaseURL(_ baseUrl: String) -> Self {
         self.baseUrl = baseUrl
         return self

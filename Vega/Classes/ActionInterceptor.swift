@@ -8,9 +8,9 @@
 import Foundation
 
 public protocol RequestInterceptor {
-    func process(_ data: RequestData) -> RequestData
+    func process(_ requestData: RequestData) -> RequestData
 }
 
 public protocol ResponseInterceptor {
-    func process(_ data: ResponseData) -> ResponseData
+    func process(_ responseData: ResponseData) -> ResponseData
 }

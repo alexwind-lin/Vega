@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.name             = 'Vega'
   s.version          = '1.0.2'
   s.summary          = 'A short description of Vega.'
-
+  s.swift_version    = '5.0'
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
@@ -38,5 +38,5 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'SweetSugar', '>=1.0.4'
+  s.dependency 'SweetSugar', '>=1.0.5'
 end

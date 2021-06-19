@@ -3,8 +3,8 @@ use_frameworks!
 platform :ios, '9.0'
 
 target 'Vega_Example' do
-  pod 'Vega', :path => '../'
-  pod 'SweetSugar', :git => 'https://github.com/alexwind-lin/SweetSugar.git'
+  pod 'Vega'
+  pod 'SweetSugar'
 
   target 'Vega_Tests' do
     inherit! :search_paths

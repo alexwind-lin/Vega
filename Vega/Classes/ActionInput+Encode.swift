@@ -23,7 +23,7 @@ public extension ActionInput {
         case .tuple:
             let dict = Mirror.getDict(from: input)
             return try JSONSerialization.data(withJSONObject: dict, options: [])
-        case .value(let key):
+        case .key(let key):
             let dict: [String: Any] = [key: input]
             return try JSONSerialization.data(withJSONObject: dict, options: [])
         }

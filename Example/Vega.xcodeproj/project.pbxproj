@@ -13,6 +13,12 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		7F95EC8C267DB94D00E8BDA4 /* NetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95EC8B267DB94D00E8BDA4 /* NetAPI.swift */; };
+		7F95EC92267DBA4D00E8BDA4 /* GHRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95EC91267DBA4D00E8BDA4 /* GHRepository.swift */; };
+		7F95EC96267DBFA700E8BDA4 /* HitoKoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95EC95267DBFA700E8BDA4 /* HitoKoto.swift */; };
+		7F95ECA0267DC30000E8BDA4 /* FakeInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95EC9F267DC30000E8BDA4 /* FakeInterceptor.swift */; };
+		7F95ECA8267DC60B00E8BDA4 /* CustomDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95ECA7267DC60B00E8BDA4 /* CustomDataConverter.swift */; };
+		7F95ECAC267DC9A600E8BDA4 /* FakeHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95ECAB267DC9A600E8BDA4 /* FakeHTTPClient.swift */; };
 		C2AECA64DE3ECFD1BF88E7ED /* Pods_Vega_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D281298FAE6141026901EC79 /* Pods_Vega_Example.framework */; };
 		C87D047C8CD8196867DD926E /* Pods_Vega_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5C0BBBC3DA4F62E90286D7 /* Pods_Vega_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -41,11 +47,17 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		720DCEB2C3DB8E95174A7796 /* Pods-Vega_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vega_Tests.release.xcconfig"; path = "Target Support Files/Pods-Vega_Tests/Pods-Vega_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		7A5C0BBBC3DA4F62E90286D7 /* Pods_Vega_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vega_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F95EC8B267DB94D00E8BDA4 /* NetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetAPI.swift; sourceTree = "<group>"; };
+		7F95EC91267DBA4D00E8BDA4 /* GHRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHRepository.swift; sourceTree = "<group>"; };
+		7F95EC95267DBFA700E8BDA4 /* HitoKoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitoKoto.swift; sourceTree = "<group>"; };
+		7F95EC9F267DC30000E8BDA4 /* FakeInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeInterceptor.swift; sourceTree = "<group>"; };
+		7F95ECA7267DC60B00E8BDA4 /* CustomDataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataConverter.swift; sourceTree = "<group>"; };
+		7F95ECAB267DC9A600E8BDA4 /* FakeHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeHTTPClient.swift; sourceTree = "<group>"; };
 		9DEDF697CD27486EFFDA9419 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		AB9C64B24EA079F9F99BB917 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BB9EA5E22EC2135169F5438D /* Pods-Vega_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vega_Example.debug.xcconfig"; path = "Target Support Files/Pods-Vega_Example/Pods-Vega_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D281298FAE6141026901EC79 /* Pods_Vega_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vega_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC7AF373AB9462AED53147F7 /* Vega.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Vega.podspec; path = ../Vega.podspec; sourceTree = "<group>"; };
+		DC7AF373AB9462AED53147F7 /* Vega.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Vega.podspec; path = ../Vega.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F1D95F17D729D4B45F031042 /* Pods-Vega_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vega_Example.release.xcconfig"; path = "Target Support Files/Pods-Vega_Example/Pods-Vega_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +116,8 @@
 		607FACD21AFB9204008FA782 /* Example for Vega */ = {
 			isa = PBXGroup;
 			children = (
+				7F95EC90267DBA2B00E8BDA4 /* NetModel */,
+				7F95EC8F267DBA2200E8BDA4 /* NetAPI */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -148,6 +162,26 @@
 				AB9C64B24EA079F9F99BB917 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		7F95EC8F267DBA2200E8BDA4 /* NetAPI */ = {
+			isa = PBXGroup;
+			children = (
+				7F95EC8B267DB94D00E8BDA4 /* NetAPI.swift */,
+				7F95EC9F267DC30000E8BDA4 /* FakeInterceptor.swift */,
+				7F95ECA7267DC60B00E8BDA4 /* CustomDataConverter.swift */,
+				7F95ECAB267DC9A600E8BDA4 /* FakeHTTPClient.swift */,
+			);
+			name = NetAPI;
+			sourceTree = "<group>";
+		};
+		7F95EC90267DBA2B00E8BDA4 /* NetModel */ = {
+			isa = PBXGroup;
+			children = (
+				7F95EC91267DBA4D00E8BDA4 /* GHRepository.swift */,
+				7F95EC95267DBFA700E8BDA4 /* HitoKoto.swift */,
+			);
+			name = NetModel;
 			sourceTree = "<group>";
 		};
 		E1537F579221DAFD0D427B76 /* Frameworks */ = {
@@ -333,6 +367,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F95EC96267DBFA700E8BDA4 /* HitoKoto.swift in Sources */,
+				7F95ECA0267DC30000E8BDA4 /* FakeInterceptor.swift in Sources */,
+				7F95ECA8267DC60B00E8BDA4 /* CustomDataConverter.swift in Sources */,
+				7F95EC92267DBA4D00E8BDA4 /* GHRepository.swift in Sources */,
+				7F95EC8C267DB94D00E8BDA4 /* NetAPI.swift in Sources */,
+				7F95ECAC267DC9A600E8BDA4 /* FakeHTTPClient.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

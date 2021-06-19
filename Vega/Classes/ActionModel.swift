@@ -12,7 +12,11 @@ public class ActionModel<Input, Output> {
     public let inputType: ActionInput
     public let outputType: ActionOutput
     
-    public var input: Input!
+    private var _input: Input!
+    public var input: Input {
+        return _input
+    }
+    
     public var callback: ((Result<Output, Error>) -> Void)?
     
     public init(annotation: ActionAnnotation<Input, Output>) {
@@ -22,7 +26,7 @@ public class ActionModel<Input, Output> {
     }
     
     public func request(_ input: Input, completion: ((Result<Output, Error>) -> Void)?) {
-        self.input = input
+        self._input = input
         self.callback = completion
         self.enqueue(completion)
     }

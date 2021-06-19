@@ -42,13 +42,13 @@ public class ActionPropertyModel {
     }
 }
 
-extension ActionPropertyModel {
+public extension ActionPropertyModel {
     func isGetHTTPMethod() -> Bool {
         return self.httpMethod == "get"
     }
 }
 
-extension ActionPropertyModel {
+public extension ActionPropertyModel {
     func getRequestData() -> RequestData {
         let requestData = RequestData()
         

@@ -1,27 +1,22 @@
 PODS:
-  - SweetSugar (1.0.1)
-  - Vega (0.1.0):
-    - SweetSugar (>= 1.0.1)
+  - SweetSugar (1.0.5)
+  - Vega (1.0.2):
+    - SweetSugar (>= 1.0.5)
 
 DEPENDENCIES:
-  - SweetSugar (from `https://github.com/alexwind-lin/SweetSugar.git`)
+  - SweetSugar (from `../../SweetSugar`)
   - Vega (from `../`)
 
 EXTERNAL SOURCES:
   SweetSugar:
-    :git: https://github.com/alexwind-lin/SweetSugar.git
+    :path: "../../SweetSugar"
   Vega:
     :path: "../"
 
-CHECKOUT OPTIONS:
-  SweetSugar:
-    :commit: f1d9980f5d1532a7e3fe36880b4b290dec30e071
-    :git: https://github.com/alexwind-lin/SweetSugar.git
-
 SPEC CHECKSUMS:
-  SweetSugar: 6fe7fbbe970ede6939ff0b5f7783eb0cbcae00c1
-  Vega: 2ae00bab7c203f3558a29347ea3fef223603a9ab
+  SweetSugar: 3381d48e6a99f1819118b4a3c3e03fa7488e23ed
+  Vega: 41b028340b96f1d42e7badf097c2560f6f9000b5
 
-PODFILE CHECKSUM: c5730955671075a0b50776e3353e6715a7b62c58
+PODFILE CHECKSUM: 63b9eb425082fccf1a3856a4180e819de22b3699
 
 COCOAPODS: 1.9.1
