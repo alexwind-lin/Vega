@@ -34,7 +34,7 @@ appleRepositories.request { (result) in
 ```swift
 var myNetApi: ActionModel<PageSize, BookList>
 ```
-一个ActionModel就是一个请求，PageSize是请求的输入类型，BookList则是输出的类型。
+一个ActionModel就是一个请求，后面跟上请求参数类型和输出参数类型，上面的例子中，PageSize是请求的输入类型，BookList则是输出的类型。
 当然，只是写明ActionModel还不够，我们还要给他加上标注信息
 ```swift
 @GET("my/book/list/path")
@@ -42,8 +42,9 @@ var myNetApi: ActionModel<Input, Output>
 ```
 这样就完成了一个请求的描述。
 实际上GET/POST，还支持另外几个参数
+```swift
 @GET(_ path: String, _ properties: ActionModelProperty..., input: ActionInput, output: ActionOutput)
-
+```
 多种的请求描述方式
 ------
 你还可以使用以下的方式来描述接口
