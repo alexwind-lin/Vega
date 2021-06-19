@@ -12,7 +12,7 @@ class MyRequestInterceptor: RequestInterceptor {
         let inputData = requestData.body 
         // 进行加密处理
         let encryptData = customEncrypt(inputData)
-        requestData.body = inputData
+        requestData.body = encryptData
         return requestData
     }
 }
@@ -20,7 +20,7 @@ class MyRequestInterceptor: RequestInterceptor {
 
 ResponseInterceptor示例
 ```swift
-class FakeResponseInterceptor: ResponseInterceptor {
+class MyResponseInterceptor: ResponseInterceptor {
     func process(_ responseData: ResponseData) -> ResponseData {
         // 不符合条件的就不处理，直接跳过
         guard responseData.error == nil, let data = responseData.data else {
