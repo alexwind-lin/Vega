@@ -74,7 +74,7 @@ extension ActionOutputValue: Decodable {
             data = cast
         case .tuple:
             data = try dict.getTupleValue()
-        case .value(let key):
+        case .key(let key):
             guard let value = dict[key] as? T else {
                 throw VegaError(code: -1, errorDescription: "the value of key [\(key)] is \(String(describing: dict[key])), it is not type \(T.self)")
 
