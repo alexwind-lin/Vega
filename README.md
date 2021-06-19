@@ -83,6 +83,7 @@ public enum ActionOutput {
 
 更多资料
 ======
+* [FAQ](Doc/FAQ.md)
 * [如何进行配置](Doc/VegaProvider.md)
 * [Interceptor使用示例（e.g. 如何进行加解密处理）](Doc/Interceptor.md)
 * [如何解析自定义的返回数据格式](Doc/DataConverter.md)
