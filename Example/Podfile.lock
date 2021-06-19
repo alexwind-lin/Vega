@@ -4,19 +4,20 @@ PODS:
     - SweetSugar (>= 1.0.5)
 
 DEPENDENCIES:
-  - SweetSugar (from `../../SweetSugar`)
   - Vega (from `../`)
 
+SPEC REPOS:
+  trunk:
+    - SweetSugar
+
 EXTERNAL SOURCES:
-  SweetSugar:
-    :path: "../../SweetSugar"
   Vega:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SweetSugar: 3381d48e6a99f1819118b4a3c3e03fa7488e23ed
-  Vega: 41b028340b96f1d42e7badf097c2560f6f9000b5
+  SweetSugar: 4be3e41dc54951e6def79c9a317b1778fb0d269a
+  Vega: 6630beff79445916cf9fee8ea4aa21d91e8e8c5c
 
-PODFILE CHECKSUM: 63b9eb425082fccf1a3856a4180e819de22b3699
+PODFILE CHECKSUM: a90ad99577bf6758286468bcd28697f9499b0f97
 
 COCOAPODS: 1.9.1
