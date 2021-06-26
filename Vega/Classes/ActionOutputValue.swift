@@ -27,11 +27,20 @@ public extension Decoder {
     }
 }
 
+public extension KeyedDecodingContainer {
+  func decode<T>(_ type: ActionOutputValue<T?>.Type, forKey: Self.Key) throws -> ActionOutputValue<T?> {
+    return try decodeIfPresent(type, forKey: forKey) ?? .init()
+  }
+}
+
 @propertyWrapper
 public struct ActionOutputValue<T> {
     private var data: T!
     
     public var wrappedValue: T {
+        if T.self is Empty.Type || T.self is Optional<Empty>.Type {
+            return Empty.empty as! T
+        }
         return data
     }
     

@@ -8,5 +8,5 @@
 import Foundation
 
 public struct Empty: Codable {
-    static let empty = Empty()
+    public static let empty = Empty()
 }
