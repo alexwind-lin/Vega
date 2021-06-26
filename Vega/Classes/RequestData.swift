@@ -55,7 +55,15 @@ public extension RequestData {
                 other.append("?")
             }
             
-            self.parameters.forEach{ other.append("\($0.key)=\($0.value)") }
+            let array = self.parameters.map { key, value -> String in
+                if let encodedKey = key.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                   let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                    return "\(encodedKey)=\(encodedValue)"
+                }
+                return ""
+            }
+            let query = array.joined(separator: "&")
+            other += query
         }
         return URL(string: base + other)!
     }
