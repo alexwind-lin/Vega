@@ -10,11 +10,17 @@ import Foundation
 public extension ActionModel {
     func getRequestData() -> RequestData {
         let requestData = property.getRequestData()
-        if property.isGetHTTPMethod() {
-            requestData.parameters = inputType.encodeInputToDict(input)
-        } else {
-            requestData.body = try? inputType.encodeInputToJSON(input)
+        do {
+            if property.isGetHTTPMethod() {
+                requestData.parameters = try inputType.encodeInputToDict(input)
+            } else {
+                requestData.body = try inputType.encodeInputToJSON(input)
+                requestData.addHttpHeader(value: "application/json", key: "Content-Type")
+            }
+        } catch let error {
+            print("\(error)")
         }
+        
         return requestData
     }
 }

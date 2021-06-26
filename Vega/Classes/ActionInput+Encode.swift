@@ -29,7 +29,31 @@ public extension ActionInput {
         }
     }
     
-    func encodeInputToDict(_ input: Any) -> [String: String] {
-        return Mirror.describeObjectAsKeyValue(input)
-    }
+    func encodeInputToDict(_ input: Any) throws -> [String: String] {
+            switch self {
+            case .encodable, .tuple:
+                return Mirror.describeObjectAsKeyValue(input)
+            case .key(let keyName):
+                guard let convertable = input as? CustomStringConvertible else {
+                    throw VegaError.createTypeDismatchError(input, typeToMatch: CustomStringConvertible.self)
+                }
+                return [keyName: convertable.description]
+            case .dict:
+                if let fit = input as? [String: String] {
+                    return fit
+                }
+                
+                guard let dict = input as? [String: Any] else {
+                    throw VegaError.createTypeDismatchError(input, typeToMatch: [String: Any].self)
+                }
+                
+                let outputDict = try dict.mapValues { value -> String in
+                    guard let convertable = value as? CustomStringConvertible else {
+                        throw VegaError.createTypeDismatchError(input, typeToMatch: [String: String].self)
+                    }
+                    return convertable.description
+                }
+                return outputDict
+            }
+        }
 }
