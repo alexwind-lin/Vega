@@ -16,9 +16,7 @@ public class ActionModel<Input, Output> {
     public var input: Input {
         return _input
     }
-    
-    public var callback: ((Result<Output, Error>) -> Void)?
-    
+        
     public init(annotation: ActionAnnotation<Input, Output>) {
         self.property = annotation.propertyModel
         self.inputType = annotation.inputType
@@ -27,7 +25,6 @@ public class ActionModel<Input, Output> {
     
     public func request(_ input: Input, completion: ((Result<Output, Error>) -> Void)?) {
         self._input = input
-        self.callback = completion
         self.enqueue(completion)
     }
     
