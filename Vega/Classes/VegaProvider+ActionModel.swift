@@ -18,12 +18,12 @@ extension VegaProvider {
         var requestData = converter.convert(action: action)
         let allInterceptors = interceptors
         allInterceptors.forEach { (interceptor) in
-            requestData = interceptor.process(model: action, requestData: requestData)
+            requestData = interceptor.process(action: action, requestData: requestData)
         }
         httpClient.performRequest(requestData) { (responseData) in
             var data = responseData
             allInterceptors.reversed().forEach({ (interceptor) in
-                data = interceptor.process(model: action, responseData: data)
+                data = interceptor.process(action: action, responseData: data)
             })
             let result = converter.convert(action: action, responseData: data)
             completion?(result)

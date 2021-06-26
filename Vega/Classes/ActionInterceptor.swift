@@ -8,11 +8,11 @@
 import Foundation
 
 public protocol RequestInterceptor {
-    func process<Input, Output>(model: ActionModel<Input, Output>, requestData: RequestData) -> RequestData
+    func process<Input, Output>(action: ActionModel<Input, Output>, requestData: RequestData) -> RequestData
 }
 
 public protocol ResponseInterceptor {
-    func process<Input, Output>(model: ActionModel<Input, Output>, responseData: ResponseData) -> ResponseData
+    func process<Input, Output>(action: ActionModel<Input, Output>, responseData: ResponseData) -> ResponseData
 }
 
 public typealias ActionInterceptor = RequestInterceptor & ResponseInterceptor

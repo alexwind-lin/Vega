@@ -9,7 +9,7 @@
 import Vega
 
 class FakeInterceptor: ActionInterceptor {
-    func process<Input, Output>(model: ActionModel<Input, Output>, requestData: RequestData) -> RequestData {
+    func process<Input, Output>(action: ActionModel<Input, Output>, requestData: RequestData) -> RequestData {
         let inputData = requestData.body ?? Data()
         let text = String(data: inputData, encoding: .utf8) ?? ""
         let fake = HitoKoto(id: 10001, hitokoto: text, from_who: "Faker Hackin")
@@ -17,7 +17,7 @@ class FakeInterceptor: ActionInterceptor {
         return requestData
     }
     
-    func process<Input, Output>(model: ActionModel<Input, Output>, responseData: ResponseData) -> ResponseData {
+    func process<Input, Output>(action: ActionModel<Input, Output>, responseData: ResponseData) -> ResponseData {
         guard responseData.error == nil, let data = responseData.data else {
             return responseData
         }
