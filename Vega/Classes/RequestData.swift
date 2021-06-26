@@ -23,8 +23,8 @@ public class RequestData {
 // MARK: - Add Header
 public extension RequestData {
     @discardableResult
-    func addHttpHeader(value: String, key: String) -> Self {
-        httpHeaders[key] = value
+    func setHttpHeader(value: String, forKey: String) -> Self {
+        httpHeaders[forKey] = value
         return self
     }
     

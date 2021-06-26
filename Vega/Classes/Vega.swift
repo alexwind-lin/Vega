@@ -16,7 +16,7 @@ public struct Vega {
 }
 
 public extension Vega {
-    static public func builder(_ identifier: VegaProviderIdentifier = "") -> VegaBuilder {
+    static func builder(_ identifier: VegaProviderIdentifier = "") -> VegaBuilder {
         return VegaBuilder(identifier)
     }
 }

@@ -15,7 +15,7 @@ public extension ActionModel {
                 requestData.parameters = try inputType.encodeInputToDict(input)
             } else {
                 requestData.body = try inputType.encodeInputToJSON(input)
-                requestData.addHttpHeader(value: "application/json", key: "Content-Type")
+                requestData.setHttpHeader(value: "application/json", forKey: "Content-Type")
             }
         } catch let error {
             print("\(error)")
