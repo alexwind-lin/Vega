@@ -33,8 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func buildComplexVega() {
         Vega.builder("FakeOne")
             .setBaseURL("https://hahahahahaha.com")
-            .addRequestInterceptor(FakeRequestInterceptor())
-            .addResponseInterceptor(FakeResponseInterceptor())
+            .addInterceptor(FakeInterceptor())
             .setHTTPClient(FakeHTTPClient())
             .setConverter(CustomDataConverter())
             .build()        
@@ -52,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func requestHitoKoto() {
-        HitokotoAPI.hitokoto.request("d") { (result) in
+        HitokotoAPI.hitokoto.request("a") { (result) in
             print(result)
         }
     }
