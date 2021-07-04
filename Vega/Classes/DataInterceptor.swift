@@ -15,4 +15,4 @@ public protocol ResponseInterceptor {
     func process<Input, Output>(action: ActionModel<Input, Output>, responseData: ResponseData) -> ResponseData
 }
 
-public typealias ActionInterceptor = RequestInterceptor & ResponseInterceptor
+public typealias DataInterceptor = RequestInterceptor & ResponseInterceptor

@@ -14,13 +14,19 @@ internal protocol VegaProvider {
     var baseUrl: String? { get }
     var httpClient: HTTPClient { get }
     var converter: DataConverter { get }
-    var interceptors: [ActionInterceptor] { get }
+    var interceptors: [DataInterceptor] { get }
 }
 
 internal struct DefaultVegaProvider: VegaProvider {
-    var identifier: VegaProviderIdentifier
     var baseUrl: String?
+    var identifier: VegaProviderIdentifier
     var httpClient: HTTPClient
     var converter: DataConverter
-    var interceptors: [ActionInterceptor] = []
+    var interceptors: [DataInterceptor] = []
+    
+    init(identifier: VegaProviderIdentifier, httpClient: HTTPClient, converter: DataConverter) {
+        self.identifier = identifier
+        self.httpClient = httpClient
+        self.converter = converter
+    }
 }

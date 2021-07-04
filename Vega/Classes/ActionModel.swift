@@ -7,16 +7,10 @@
 
 import Foundation
 
-public protocol ActionModelDelegate: AnyObject {
-    func actionDidStart<Input, Output>(_ action: ActionModel<Input, Output>)
-    func actionDidFinish<Input, Output>(_ action: ActionModel<Input, Output>, result: Result<Output, Error>)
-}
-
 public class ActionModel<Input, Output> {
     public let property: ActionPropertyModel
     public let inputType: ActionInput
     public let outputType: ActionOutput
-    public weak var delegate: ActionModelDelegate?
     
     private var _input: Input!
     public var input: Input {
@@ -31,14 +25,6 @@ public class ActionModel<Input, Output> {
     
     public dynamic func request(_ input: Input, completion: ((Result<Output, Error>) -> Void)?) {
         self._input = input
-        
-        self.delegate?.actionDidStart(self)
-        self.enqueue {[weak self] result in
-            guard let self = self else {
-                return
-            }
-            self.delegate?.actionDidFinish(self, result: result)
-        }
         self.enqueue(completion)
     }
     

@@ -31,7 +31,7 @@ public class VegaBuilder {
     private var baseUrl: String?
     private var httpClient: HTTPClient?
     private var converter: DataConverter?
-    private var interceptors: [ActionInterceptor] = []
+    private var interceptors: [DataInterceptor] = []
 }
 
 public extension VegaBuilder {
@@ -49,13 +49,15 @@ public extension VegaBuilder {
         return self
     }
     
-    func addInterceptor(_ interceptor: ActionInterceptor) -> Self {
+    func addInterceptor(_ interceptor: DataInterceptor) -> Self {
         self.interceptors.append(interceptor)
         return self
     }
     
     func build() {
-        let provider = DefaultVegaProvider(identifier: identifier, baseUrl: baseUrl, httpClient: httpClient ?? DefaultHTTPClient(), converter: converter ?? DefaultJSONConverter(), interceptors: interceptors)
+        var provider = DefaultVegaProvider(identifier: identifier, httpClient: httpClient ?? DefaultHTTPClient(), converter: converter ?? DefaultJSONConverter())
+        provider.baseUrl = baseUrl
+        provider.interceptors = interceptors
         Vega.regist(provider)
     }
 }

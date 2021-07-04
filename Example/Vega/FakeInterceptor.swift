@@ -8,7 +8,7 @@
 
 import Vega
 
-class FakeInterceptor: ActionInterceptor {
+class FakeInterceptor: DataInterceptor {
     func process<Input, Output>(action: ActionModel<Input, Output>, requestData: RequestData) -> RequestData {
         let inputData = requestData.body ?? Data()
         let text = String(data: inputData, encoding: .utf8) ?? ""
