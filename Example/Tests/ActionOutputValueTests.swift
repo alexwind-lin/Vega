@@ -37,14 +37,14 @@ class ActionOutputValueTests: XCTestCase {
         
         do {
             // Empty应该不管什么类型，都可以返回Empty
-            var response = try JSONDecoder().bind(actionOutput: .dict).decode(CustomResponse<Empty>.self, from: data)
+            var response = try JSONDecoder().bind(actionOutput: .raw).decode(CustomResponse<Empty>.self, from: data)
             XCTAssertNotNil(response.data)
             
             // 尽管data有值，而且不是Empty，也应该返回Empty
-            response = try JSONDecoder().bind(actionOutput: .dict).decode(CustomResponse<Empty>.self, from: anotherData)
+            response = try JSONDecoder().bind(actionOutput: .raw).decode(CustomResponse<Empty>.self, from: anotherData)
             XCTAssertNotNil(response.data)
             
-            let anotherResponse = try JSONDecoder().bind(actionOutput: .dict).decode(ActionOutputValue<Empty>.self, from: data)
+            let anotherResponse = try JSONDecoder().bind(actionOutput: .raw).decode(ActionOutputValue<Empty>.self, from: data)
             XCTAssertNotNil(anotherResponse.wrappedValue)
             
         } catch let error {
@@ -70,7 +70,7 @@ class ActionOutputValueTests: XCTestCase {
         var extra: String?
     }
     
-    func testDecodableOutput() {
+    func testOutput() {
         let text = """
         {
             "data": {
@@ -85,7 +85,7 @@ class ActionOutputValueTests: XCTestCase {
             XCTAssertEqual(decodableResponse.data?.hello, "world")
             XCTAssertEqual(decodableResponse.data?.extra, nil)
             
-            let dictResponse = try JSONDecoder().bind(actionOutput: .dict).decode(CustomResponse<[String: Any]>.self, from: data)
+            let dictResponse = try JSONDecoder().bind(actionOutput: .raw).decode(CustomResponse<[String: Any]>.self, from: data)
             XCTAssertEqual(dictResponse.data!["hello"] as! String, "world")
             XCTAssertEqual(dictResponse.data!["byte"] as! String, "Giga")
             
@@ -95,6 +95,115 @@ class ActionOutputValueTests: XCTestCase {
             let tupleResponse = try JSONDecoder().bind(actionOutput: .tuple).decode(CustomResponse<(hello: String?, byte: String)>.self, from: data)
             XCTAssertEqual(tupleResponse.data!.hello, "world")
             XCTAssertEqual(tupleResponse.data!.byte, "Giga")
+        } catch let error {
+            XCTAssertFalse(true, error.localizedDescription)
+        }
+    }
+    
+    func testDictRawOutput() {
+        let dictText = """
+        {
+            "data": {
+                "hello": "world",
+                "byte": "Giga",
+                "childs": [
+                    {
+                        "age": 10,
+                        "name": "A",
+                    },
+                    {
+                        "age": 100,
+                        "name": "AA",
+                    }
+                ]
+            }
+        }
+        """
+        let data = dictText.data(using: .utf8)!
+        do {
+            let dictResponse = try JSONDecoder().bind(actionOutput: .raw).decode(CustomResponse<[String: Any]>.self, from: data)
+            let result: [String: Any] = [
+                "hello": "world",
+                "byte": "Giga",
+                "childs": [
+                    [
+                        "age": 10,
+                        "name": "A",
+                    ],
+                    [
+                        "age": 100,
+                        "name": "AA",
+                    ]
+                ]
+            ]
+            
+            XCTAssertEqual(dictResponse.data! as NSDictionary, result as NSDictionary)
+        } catch let error {
+            XCTAssertFalse(true, error.localizedDescription)
+        }
+    }
+    
+    func testArrayRawOutput() {
+        let arrayText = """
+        {
+            "data": [
+                10, 8, 8,
+                [8, 8],
+                {
+                    "hello": "world"
+                },
+                [
+                    {
+                        "age": 10,
+                        "name": "A",
+                        "idList": [1, 2, 3]
+                    },
+                    {
+                        "age": 100,
+                        "name": "AA",
+                        "idList": [11, 22, 33]
+                    },
+                ]
+            ]
+        }
+        """
+        let data = arrayText.data(using: .utf8)!
+        do {
+            let arrayResponse = try JSONDecoder().bind(actionOutput: .raw).decode(CustomResponse<[Any]>.self, from: data)
+            let result: [Any] = [
+                10, 8, 8,
+                [8, 8],
+                ["hello": "world"],
+                [
+                    [
+                        "age": 10,
+                        "name": "A",
+                        "idList": [1, 2, 3]
+                    ],
+                    [
+                        "age": 100,
+                        "name": "AA",
+                        "idList": [11, 22, 33]
+                    ]
+                ]
+            ]
+            XCTAssertEqual(result as NSArray, arrayResponse.data! as NSArray)
+        } catch let error {
+            XCTAssertFalse(true, error.localizedDescription)
+        }
+    }
+    
+    
+    func testStringRawOuput() {
+        let text = """
+        {
+            "data": "hahaha"
+        }
+        """
+        let data = text.data(using: .utf8)!
+        do {
+            let response = try JSONDecoder().bind(actionOutput: .raw).decode(CustomResponse<String>.self, from: data)
+            XCTAssertEqual(response.data, "hahaha")
         } catch let error {
             XCTAssertFalse(true, error.localizedDescription)
         }

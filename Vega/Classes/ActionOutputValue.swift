@@ -59,7 +59,6 @@ public struct ActionOutputValue<T> {
 
 extension ActionOutputValue: Decodable {
     public init(from decoder: Decoder) throws {
-        print("decode for T: \(T.self)")
         guard let outputType = decoder.actionOutput else {
             let errorDesc = """
             Can not find ActionOutput Key in json decoder!
@@ -88,24 +87,70 @@ extension ActionOutputValue: Decodable {
             return
         }
         
+        if isDictConvertable(outputType)  {
+            data = try decodeKeyedValues(decoder, outputType: outputType)
+        }
+        
+        if case .raw = outputType {
+            data = try decodeRawType(decoder)
+        }
+    }
+    
+    private func getNonOptionalType() -> Any {
+        var rawType: Any = T.self
+        if let type = T.self as? AnyOptional.Type {
+            rawType = type.wrappedNonOptionalType
+        }
+        return rawType
+    }
+    
+    private func isDictConvertable(_ outputType: ActionOutput) -> Bool {
+        switch outputType {
+        case .tuple, .key:
+            return true
+        case .decodable, .raw:
+            return false
+        }
+    }
+    
+    private func decodeKeyedValues(_ decoder: Decoder, outputType: ActionOutput) throws -> T {
         let keyedContainer = try decoder.container(keyedBy: JSONCodingKeys.self)
         let dict: [String: Any] = try keyedContainer.decode([String: Any].self)
         switch outputType {
-        case .dict:
+        case .raw:
             guard let cast = dict as? T else {
                 throw VegaError(code: -1, errorDescription: "\(dict) is not type of \(T.self)")
             }
-            data = cast
+            return cast
         case .tuple:
-            data = try dict.getTupleValue()
+            return try dict.getTupleValue()
         case .key(let key):
             guard let value = dict[key] as? T else {
                 throw VegaError(code: -1, errorDescription: "the value of key [\(key)] is \(String(describing: dict[key])), it is not type \(T.self)")
 
             }
-            data = value
-        default:
+            return value
+        case .decodable:
             throw VegaError(code: -1, errorDescription: "should not arrived here")
         }
+    }
+    
+    private func decodeRawType(_ decoder: Decoder) throws -> T {
+        let rawType = getNonOptionalType()
+        if rawType is String.Type {
+            let singleContainer = try decoder.singleValueContainer()
+            return try singleContainer.decode(String.self) as! T
+        } else if rawType is [Any].Type {
+            var container = try decoder.unkeyedContainer()
+            return try container.decode([Any].self) as! T
+        } else if rawType is [String: Any].Type {
+            return try decodeKeyedValues(decoder, outputType: .raw)
+        } else {
+            throw VegaError(code: VegaErrorType.typeDismatch.rawValue, errorDescription: ".raw only support String/[Any]/[String: Any]")
+        }
+    }
+    
+    private func decodeArrayValues(_ decoder: Decoder) throws -> T {
+        fatalError()
     }
 }
