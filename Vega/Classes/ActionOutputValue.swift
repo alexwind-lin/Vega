@@ -29,6 +29,8 @@ public extension Decoder {
 
 public extension KeyedDecodingContainer {
   func decode<T>(_ type: ActionOutputValue<T?>.Type, forKey: Self.Key) throws -> ActionOutputValue<T?> {
+    // 如果返回返回的数据节点没有对应字段，则直接返回一个ActionOutputValue
+    // 非Empty的返回值在获取data时会抛出异常
     return try decodeIfPresent(type, forKey: forKey) ?? .init()
   }
 }
@@ -38,10 +40,17 @@ public struct ActionOutputValue<T> {
     private var data: T!
     
     public var wrappedValue: T {
-        if T.self is Empty.Type || T.self is Optional<Empty>.Type {
+        if isEmptyWrapper() {
             return Empty.empty as! T
         }
         return data
+    }
+    
+    fileprivate func isEmptyWrapper() -> Bool {
+        if T.self is Empty.Type || T.self is Optional<Empty>.Type {
+            return true
+        }
+        return false
     }
     
     public init() {
@@ -50,6 +59,7 @@ public struct ActionOutputValue<T> {
 
 extension ActionOutputValue: Decodable {
     public init(from decoder: Decoder) throws {
+        print("decode for T: \(T.self)")
         guard let outputType = decoder.actionOutput else {
             let errorDesc = """
             Can not find ActionOutput Key in json decoder!
@@ -57,6 +67,11 @@ extension ActionOutputValue: Decodable {
             JSONDecoder().bind(actionOutput: myActionOutput).decode(xxx.self, from: data)
             """
             throw VegaError(code: -1, errorDescription: errorDesc)
+        }
+
+        if isEmptyWrapper() {
+            data = Empty.empty as? T
+            return
         }
         
         if outputType.isDecodableType {

@@ -61,6 +61,16 @@
                ReferencedContainer = "container:Vega.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F5AC35E26918C430046CFDC"
+               BuildableName = "VegaTest.xctest"
+               BlueprintName = "VegaTest"
+               ReferencedContainer = "container:Vega.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
