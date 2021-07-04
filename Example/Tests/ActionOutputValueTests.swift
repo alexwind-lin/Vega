@@ -66,8 +66,14 @@ class ActionOutputValueTests: XCTestCase {
     }
     
     private struct Greeting: Decodable {
+        struct Child: Decodable {
+            var name: String?
+            var age: Int?
+        }
+        
         var hello: String?
         var extra: String?
+        var childs: [Child]?
     }
     
     func testOutput() {
@@ -75,7 +81,17 @@ class ActionOutputValueTests: XCTestCase {
         {
             "data": {
                 "hello": "world",
-                "byte": "Giga"
+                "byte": "Giga",
+                "childs": [
+                    {
+                        "age": 10,
+                        "name": "A",
+                    },
+                    {
+                        "age": 100,
+                        "name": "AA",
+                    }
+                ]
             }
         }
         """
@@ -84,7 +100,15 @@ class ActionOutputValueTests: XCTestCase {
             let decodableResponse = try JSONDecoder().bind(actionOutput: .decodable).decode(CustomResponse<Greeting>.self, from: data)
             XCTAssertEqual(decodableResponse.data?.hello, "world")
             XCTAssertEqual(decodableResponse.data?.extra, nil)
+            XCTAssertNotNil(decodableResponse.data?.childs)
             
+            let children = decodableResponse.data!.childs!
+            XCTAssertEqual(children.count, 2)
+            XCTAssertEqual(children[0].age, 10)
+            XCTAssertEqual(children[0].name, "A")
+            XCTAssertEqual(children[1].age, 100)
+            XCTAssertEqual(children[1].name, "AA")
+
             let dictResponse = try JSONDecoder().bind(actionOutput: .raw).decode(CustomResponse<[String: Any]>.self, from: data)
             XCTAssertEqual(dictResponse.data!["hello"] as! String, "world")
             XCTAssertEqual(dictResponse.data!["byte"] as! String, "Giga")

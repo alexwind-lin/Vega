@@ -146,7 +146,7 @@ extension ActionOutputValue: Decodable {
         } else if rawType is [String: Any].Type {
             return try decodeKeyedValues(decoder, outputType: .raw)
         } else {
-            throw VegaError(code: VegaErrorType.typeDismatch.rawValue, errorDescription: ".raw only support String/[Any]/[String: Any]")
+            throw VegaError(code: VegaErrorType.typeDismatch.rawValue, errorDescription: "output type .raw only support String/[Any]/[String: Any], or do you want to use .decodable?")
         }
     }
     
