@@ -15,6 +15,7 @@ internal protocol VegaProvider {
     var httpClient: HTTPClient { get }
     var converter: DataConverter { get }
     var interceptors: [DataInterceptor] { get }
+    var actionInterceptors: [ActionInterceptor] { get }
 }
 
 internal struct DefaultVegaProvider: VegaProvider {
@@ -23,6 +24,7 @@ internal struct DefaultVegaProvider: VegaProvider {
     var httpClient: HTTPClient
     var converter: DataConverter
     var interceptors: [DataInterceptor] = []
+    var actionInterceptors: [ActionInterceptor] = []
     
     init(identifier: VegaProviderIdentifier, httpClient: HTTPClient, converter: DataConverter) {
         self.identifier = identifier
