@@ -14,6 +14,7 @@ public class ActionPropertyModel {
     public var timeout: TimeInterval?
     public var httpHeaders: [String: String] = [:]
     public var provider: VegaProviderIdentifier?
+    public var retry: Int = 0
     public var userInfo: [String: Any] = [:]
     
     public init(with properties: [ActionProperty]) {
@@ -31,6 +32,8 @@ public class ActionPropertyModel {
                 self.httpHeaders.merge(dict) { _, new in new }
             case .provider(let identifier):
                 self.provider = identifier
+            case .retry(let count):
+                self.retry = count
             case .custom(let key, let value):
                 self.userInfo[key] = value
             }

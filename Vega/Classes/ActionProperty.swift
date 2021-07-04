@@ -14,5 +14,6 @@ public enum ActionProperty {
     case timeout(TimeInterval)
     case httpHeaders([String: String])
     case provider(VegaProviderIdentifier)   // 指定这个请求使用哪个VegaProvider
+    case retry(Int) // 指定重试次数
     case custom(_ key: String, _ value: Any)    // 留待自定义扩展使用
 }
