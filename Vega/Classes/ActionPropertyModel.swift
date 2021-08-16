@@ -7,17 +7,25 @@
 
 import Foundation
 
-public class ActionPropertyModel {
-    public var baseUrl: String = ""
-    public var path: String = ""
-    public var httpMethod: String = "get"
-    public var timeout: TimeInterval?
-    public var httpHeaders: [String: String] = [:]
-    public var provider: VegaProviderIdentifier?
-    public var retry: Int = 0
-    public var userInfo: [String: Any] = [:]
+internal class ActionPropertyModel {
+    public private(set) var baseUrl: String = ""
+    public private(set) var path: String = ""
+    public private(set) var httpMethod: String = "get"
+    public private(set) var timeout: TimeInterval?
+    public private(set) var retry: Int = 0
+    public private(set) var httpHeaders: [String: String] = [:]
+    public private(set) var provider: VegaProviderIdentifier?
+    public private(set) var userInfo: [String: Any] = [:]
     
     public init(with properties: [ActionProperty]) {
+        self.update(properties: properties)
+        
+        if self.baseUrl.isEmpty {
+            self.baseUrl = self.provider.provider.baseUrl ?? ""
+        }
+    }
+    
+    func update(properties: [ActionProperty]) {
         properties.forEach { (property) in
             switch property {
             case .baseUrl(let url):
@@ -38,20 +46,24 @@ public class ActionPropertyModel {
                 self.userInfo[key] = value
             }
         }
-        
-        if self.baseUrl.isEmpty {
-            self.baseUrl = self.provider.provider.baseUrl ?? ""
-        }
+    }
+    
+    func customProperty(forKey: String) -> Any? {
+        return self.userInfo[forKey]
+    }
+    
+    func deleteCustomProperty(forKey: String) {
+        self.userInfo.removeValue(forKey: forKey)
     }
 }
 
-public extension ActionPropertyModel {
+extension ActionPropertyModel {
     func isGetHTTPMethod() -> Bool {
         return self.httpMethod == "get"
     }
 }
 
-public extension ActionPropertyModel {
+extension ActionPropertyModel {
     func getRequestData() -> RequestData {
         let requestData = RequestData()
         

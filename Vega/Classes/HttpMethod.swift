@@ -24,7 +24,7 @@ public class GET<Input, Output>: ActionAnnotation<Input, Output> {
     }
     
     public override func customize() {
-        self.propertyModel.httpMethod = "get"
+        self.propertyModel.update(properties: [.httpMethod("get")])
     }
 }
 
@@ -39,7 +39,7 @@ public class POST<Input, Output>: ActionAnnotation<Input, Output> {
     }
     
     public override func customize() {
-        self.propertyModel.httpMethod = "post"
+        self.propertyModel.update(properties: [.httpMethod("post")])
     }
 }
 

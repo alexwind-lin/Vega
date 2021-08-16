@@ -7,9 +7,9 @@
 
 import Foundation
 
-public extension ActionModel {
+public extension ActionModel {    
     func getRequestData() -> RequestData {
-        let requestData = property.getRequestData()
+        let requestData = getBasicRequestData()
         do {
             if property.isGetHTTPMethod() {
                 requestData.parameters = try inputType.encodeInputToDict(input)

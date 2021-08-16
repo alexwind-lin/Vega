@@ -8,7 +8,7 @@
 import Foundation
 
 public class ActionModel<Input, Output> {
-    public let property: ActionPropertyModel
+    internal let property: ActionPropertyModel
     public let inputType: ActionInput
     public let outputType: ActionOutput
     
