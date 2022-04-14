@@ -42,7 +42,7 @@ extension VegaProvider {
         }
         
         
-        httpClient.performRequest(requestData) { (responseData) in
+        httpClient.performRequest(action: action, requestData: requestData) { (responseData) in
             var data = responseData
             allInterceptors.reversed().forEach({ (interceptor) in
                 data = interceptor.process(action: action, responseData: data)

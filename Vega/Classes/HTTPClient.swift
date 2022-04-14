@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol HTTPClient {
-    func performRequest(_ requestData: RequestData, completion: @escaping (_ response: ResponseData) -> Void)
+    func performRequest<Input, Output>(action: ActionModel<Input, Output>, requestData: RequestData, completion: @escaping (_ response: ResponseData) -> Void)
 }

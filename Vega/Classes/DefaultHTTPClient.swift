@@ -17,14 +17,14 @@ public class DefaultHTTPClient: HTTPClient {
     let client = SystemHTTPClient()
     #endif
     
-    public func performRequest(_ requestData: RequestData, completion: @escaping (ResponseData) -> Void) {
-        client.performRequest(requestData, completion: completion)
+    public func performRequest<Input, Output>(action: ActionModel<Input, Output>, requestData: RequestData, completion: @escaping (ResponseData) -> Void) {
+        client.performRequest(action: action, requestData: requestData, completion: completion)
     }
 }
 
 #if canImport(Alamofire)
 class AlamofireHTTPClient: HTTPClient {
-    func performRequest(_ requestData: RequestData, completion: @escaping (ResponseData) -> Void) {
+    func performRequest<Input, Output>(action: ActionModel<Input, Output>, requestData: RequestData, completion: @escaping (ResponseData) -> Void) {
         let url = requestData.url
         let headers = HTTPHeaders(requestData.httpHeaders)
         let request = AF.request(url, method: .init(rawValue: requestData.httpMethod), parameters: requestData.body, encoder: RawEncoder.default, headers: headers) { (urlRequest) in
@@ -53,7 +53,7 @@ class AlamofireHTTPClient: HTTPClient {
 }
 #else
 class SystemHTTPClient: HTTPClient {
-    func performRequest(_ requestData: RequestData, completion: @escaping (ResponseData) -> Void) {
+    func performRequest<Input, Output>(action: ActionModel<Input, Output>, requestData: RequestData, completion: @escaping (ResponseData) -> Void) {
         var request = URLRequest(url: requestData.url)
         if let timeout = requestData.timeout {
             request.timeoutInterval = timeout
