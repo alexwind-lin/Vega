@@ -42,6 +42,7 @@ public extension ActionModel {
         return self.property.deleteCustomProperty(forKey: forKey)
     }
     
+    @discardableResult
     func updateProperty(_ property: ActionProperty) -> ActionModel {
         self.property.update(properties: [property])
         return self

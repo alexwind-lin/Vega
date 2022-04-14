@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class RequestData {
+open class RequestData {
     public var baseUrl: String = ""
     public var path: String = ""
     public var httpMethod: String = "get"
@@ -15,6 +15,9 @@ public class RequestData {
     public var parameters: [String: String] = [:]
     public var body: Data?
     public var timeout: TimeInterval?
+    
+    // 用于传递过程中的一些扩展
+    public var extendInfo: [String: Any] = [:]
     
     public init() {
     }

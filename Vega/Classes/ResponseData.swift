@@ -7,10 +7,13 @@
 
 import Foundation
 
-public class ResponseData {
+open class ResponseData {
     public var response: HTTPURLResponse?
     public var data: Data?
     public var error: Error?
+    
+    // 用于传递过程中的扩展
+    public var extendInfo: [String: Any] = [:]
     
     public init() {
     }
