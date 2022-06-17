@@ -9,7 +9,7 @@
 import Vega
 
 class FakeHTTPClient: HTTPClient {
-    func performRequest(_ requestData: RequestData, completion: @escaping (ResponseData) -> Void) {
+    func performRequest<Input, Output>(action: ActionModel<Input, Output>, requestData: RequestData, completion: @escaping (ResponseData) -> Void) {
         let responseData = ResponseData()
         let httpResponse = HTTPURLResponse(url: URL(fileURLWithPath: "/"), statusCode: 200, httpVersion: nil, headerFields: nil)
         responseData.response = httpResponse
