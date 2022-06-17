@@ -9,7 +9,3 @@ fatalError("there is no provider built!")
 Vega.builder().build()
 ```
 具体的设置方式，请参考[这里](VegaProvider.md)
-
-[网络请求数据自定义格式解析](DataConverter.md)
-[请求拦截器](Interceptor.md)
-[自定义属性](CustomProperty.md)
