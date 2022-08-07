@@ -22,12 +22,17 @@ extension VegaProvider {
         
         // 检查ActionInterceptor，如果被中断，则不继续执行
         guard let action = performActionRequestInterceptor(action: action, with: allActionInterceptors) else {
+            let error = VegaError(code: .interupt, errorDescription: nil)
+            completion?(.failure(error))
             return
         }
         
         performHTTPRequest(action: action, retryCount: action.property.retry) { result in
             // 检查ActionInterceptor，如果被中断，则不调用completion
             guard let _ = perfromActionResponseInterceptor(action: action, result: result, with: allActionInterceptors.reversed()) else {
+                
+                let error = VegaError(code: .interupt, errorDescription: nil)
+                completion?(.failure(error))
                 return
             }
             completion?(result)

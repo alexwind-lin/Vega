@@ -21,6 +21,7 @@ public enum VegaErrorType: Int {
     case noError = 0
     case unknown = -1
     case typeDismatch = -2
+    case interupt = -3
 }
 
 public extension VegaError {
