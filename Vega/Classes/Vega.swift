@@ -32,7 +32,8 @@ public class VegaBuilder {
     private var httpClient: HTTPClient?
     private var converter: DataConverter?
     private var interceptors: [DataInterceptor] = []
-    private var actionInterceptors: [ActionInterceptor] = []
+    private var actionRequestInterceptors: [ActionRequestInterceptor] = []
+    private var actionResponseInterceptors: [ActionResponseInterceptor] = []
     private var queue: DispatchQueue?
 }
 
@@ -56,8 +57,13 @@ public extension VegaBuilder {
         return self
     }
     
-    func addActionInterceptor(_ interceptor: ActionInterceptor) -> Self {
-        self.actionInterceptors.append(interceptor)
+    func addActionRequestInterceptor(_ interceptor: ActionRequestInterceptor) -> Self {
+        self.actionRequestInterceptors.append(interceptor)
+        return self
+    }
+    
+    func addActionResponseInterceptor(_ interceptor: ActionResponseInterceptor) -> Self {
+        self.actionResponseInterceptors.append(interceptor)
         return self
     }
     
@@ -70,7 +76,8 @@ public extension VegaBuilder {
         var provider = DefaultVegaProvider(identifier: identifier, httpClient: httpClient ?? DefaultHTTPClient(), converter: converter ?? DefaultJSONConverter())
         provider.baseUrl = baseUrl
         provider.interceptors = interceptors
-        provider.actionInterceptors = actionInterceptors
+        provider.actionRequestInterceptors = actionRequestInterceptors
+        provider.actionResponseInterceptors = actionResponseInterceptors
         if let queue = self.queue {
             provider.queue = queue
         }

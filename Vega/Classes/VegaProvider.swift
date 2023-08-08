@@ -15,8 +15,11 @@ internal protocol VegaProvider {
     var httpClient: HTTPClient { get }
     var converter: DataConverter { get }
     var interceptors: [DataInterceptor] { get }
-    var actionInterceptors: [ActionInterceptor] { get }
+    var actionRequestInterceptors: [ActionRequestInterceptor] { get }
+    var actionResponseInterceptors: [ActionResponseInterceptor] { get }
     var queue: DispatchQueue { get }
+    
+    func enqueue<Input, Output>(action: ActionModel<Input, Output>, completion: ((Result<Output, Error>) -> Void)?)
 }
 
 internal struct DefaultVegaProvider: VegaProvider {
@@ -25,7 +28,8 @@ internal struct DefaultVegaProvider: VegaProvider {
     var httpClient: HTTPClient
     var converter: DataConverter
     var interceptors: [DataInterceptor] = []
-    var actionInterceptors: [ActionInterceptor] = []
+    var actionRequestInterceptors: [ActionRequestInterceptor] = []
+    var actionResponseInterceptors: [ActionResponseInterceptor] = []
     var queue: DispatchQueue = .main
     
     init(identifier: VegaProviderIdentifier, httpClient: HTTPClient, converter: DataConverter) {

@@ -17,3 +17,11 @@ public enum ActionProperty {
     case retry(Int) // 指定重试次数
     case custom(_ key: String, _ value: Any)    // 留待自定义扩展使用
 }
+
+
+// MARK: - 扩展自定义属性
+/// e.g:
+///     extension ActionProperty {
+///         static var useEncrypt: ActionCustomProperty<Bool> = .init("useEncrypt")
+///     }
+/// 可以通过类似@POST("", .useEncrypt(true))来设置

@@ -22,4 +22,8 @@ struct HitokotoAPI {
 struct FakeHitoKotoAPI {
     @POST("happy/to/path", .timeout(10.0), .provider("FakeOne"), input: .dict)
     static var fakeHitoKoto: ActionModel<[String: String], HitoKoto>
+    
+    @POST("way/to/dest", .useEncrypt(false))
+    static var encryptedAPI: ActionModel<[String: String], HitoKoto>
 }
+

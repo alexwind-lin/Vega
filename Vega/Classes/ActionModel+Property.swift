@@ -40,19 +40,15 @@ public extension ActionModel {
 }
 
 // MARK: - 自定义属性辅助
-
-public protocol ActionCustomPropertyOwner {
-    static var shared: Self { get }
-}
-
-public protocol ActionCustomPropertyOperator {
-    func customProperty(forKey: String) -> Any?
-    @discardableResult
-    func updateProperty(_ property: ActionProperty) -> Self
-    func deleteCustomProperty(forKey: String)
-}
-
-extension ActionModel: ActionCustomPropertyOperator {
+extension ActionModel {
+    public func custom<T>(_ property: ActionCustomProperty<T>) -> T? {
+        return self.property.customProperty(forKey: property.label) as? T
+    }
+    
+    public func update<T>(custom property: ActionCustomProperty<T>, value: T?) {
+        self.updateProperty(.custom(property.label, value as Any))
+    }
+    
     public func customProperty(forKey: String) -> Any? {
         return self.property.customProperty(forKey: forKey)
     }
@@ -65,44 +61,5 @@ extension ActionModel: ActionCustomPropertyOperator {
     public func updateProperty(_ property: ActionProperty) -> Self {
         self.property.update(properties: [property])
         return self
-    }
-}
-
-public protocol ActionModelCustomPropertyExtension {
-    associatedtype PropertyOwner: ActionCustomPropertyOwner
-    
-    var model: ActionCustomPropertyOperator { get }
-    subscript<T>(dynamicMember keyPath: KeyPath<PropertyOwner, ActionCustomProperty<T>>) -> T? { get nonmutating set }
-}
-
-public struct ActionCustomProperty<T> {
-    public let label: String
-
-    public func callAsFunction(_ param: T) -> ActionProperty {
-        return .custom(label, param)
-    }
-}
-
-extension ActionCustomProperty where T == Void {
-    public func callAsFunction() -> ActionProperty {
-        return .custom(label, Void.self)
-    }
-}
-
-// 默认实现
-public extension ActionModelCustomPropertyExtension {
-    subscript<T>(dynamicMember keyPath: KeyPath<PropertyOwner, ActionCustomProperty<T>>) -> T? {
-        get {
-            let propertyName = PropertyOwner.shared[keyPath: keyPath].label
-            return model.customProperty(forKey: propertyName) as? T
-        }
-        nonmutating set {
-            let property = PropertyOwner.shared[keyPath: keyPath]
-            if let v = newValue {
-                model.updateProperty(.custom(property.label, v))
-            } else {
-                model.deleteCustomProperty(forKey: property.label)
-            }
-        }
     }
 }

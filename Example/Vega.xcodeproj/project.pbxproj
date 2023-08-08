@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* ActionOutputValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* ActionOutputValueTests.swift */; };
+		7F2076972A823CC600A907BB /* CustomActionProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2076962A823CC600A907BB /* CustomActionProperty.swift */; };
 		7F95EC8C267DB94D00E8BDA4 /* NetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95EC8B267DB94D00E8BDA4 /* NetAPI.swift */; };
 		7F95EC92267DBA4D00E8BDA4 /* GHRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95EC91267DBA4D00E8BDA4 /* GHRepository.swift */; };
 		7F95EC96267DBFA700E8BDA4 /* HitoKoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95EC95267DBFA700E8BDA4 /* HitoKoto.swift */; };
@@ -47,6 +48,7 @@
 		607FACEB1AFB9204008FA782 /* ActionOutputValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionOutputValueTests.swift; sourceTree = "<group>"; };
 		720DCEB2C3DB8E95174A7796 /* Pods-Vega_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vega_Tests.release.xcconfig"; path = "Target Support Files/Pods-Vega_Tests/Pods-Vega_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		7A5C0BBBC3DA4F62E90286D7 /* Pods_Vega_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vega_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F2076962A823CC600A907BB /* CustomActionProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionProperty.swift; sourceTree = "<group>"; };
 		7F95EC8B267DB94D00E8BDA4 /* NetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetAPI.swift; sourceTree = "<group>"; };
 		7F95EC91267DBA4D00E8BDA4 /* GHRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHRepository.swift; sourceTree = "<group>"; };
 		7F95EC95267DBFA700E8BDA4 /* HitoKoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitoKoto.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				7F95EC9F267DC30000E8BDA4 /* FakeInterceptor.swift */,
 				7F95ECA7267DC60B00E8BDA4 /* CustomDataConverter.swift */,
 				7F95ECAB267DC9A600E8BDA4 /* FakeHTTPClient.swift */,
+				7F2076962A823CC600A907BB /* CustomActionProperty.swift */,
 			);
 			name = NetAPI;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				7F95ECA8267DC60B00E8BDA4 /* CustomDataConverter.swift in Sources */,
 				7F95EC92267DBA4D00E8BDA4 /* GHRepository.swift in Sources */,
 				7F95EC8C267DB94D00E8BDA4 /* NetAPI.swift in Sources */,
+				7F2076972A823CC600A907BB /* CustomActionProperty.swift in Sources */,
 				7F95ECAC267DC9A600E8BDA4 /* FakeHTTPClient.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
