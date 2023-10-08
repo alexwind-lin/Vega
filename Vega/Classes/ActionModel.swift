@@ -12,8 +12,9 @@ public class ActionModel<Input, Output> {
     public let inputType: ActionInput
     public let outputType: ActionOutput
     
-    internal var interceptorList: [ActionRequestInterceptor] = []
-    
+    internal var requestInterceptorList: [ActionRequestInterceptor] = []
+    internal var responseInterceptorList: [ActionResponseInterceptor] = []
+
     internal var progressHandler: ((_ completeCount: Int64, _ totalCount: Int64) -> Void)?
     
     private var _input: Input!
@@ -27,9 +28,22 @@ public class ActionModel<Input, Output> {
         self.outputType = annotation.outputType
     }
     
-    public func addInterceptor(_ interceptor: ActionRequestInterceptor) {
-        self.interceptorList.append(interceptor)
+    public func addRequestInterceptor(_ interceptor: ActionRequestInterceptor, insertAtHead: Bool = false) {
+        if insertAtHead {
+            self.requestInterceptorList.insert(interceptor, at: 0)
+        } else {
+            self.requestInterceptorList.append(interceptor)
+        }
     }
+    
+    public func addResponseInterceptor(_ interceptor: ActionResponseInterceptor, insertAtHeader: Bool = false) {
+        if insertAtHeader {
+            self.responseInterceptorList.insert(interceptor, at: 0)
+        } else {
+            self.responseInterceptorList.append(interceptor)
+        }
+    }
+    
     
     public dynamic func request(_ input: Input, completion: ((Result<Output, Error>) -> Void)?) {
         self._input = input

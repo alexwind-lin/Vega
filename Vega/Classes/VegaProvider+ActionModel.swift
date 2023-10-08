@@ -19,8 +19,8 @@ extension ActionModel {
 
 extension DefaultVegaProvider {
     func enqueue<Input, Output>(action: ActionModel<Input, Output>, completion: ((Result<Output, Error>) -> Void)?) {
-        var allActionInterceptors: [ActionRequestInterceptor] = actionRequestInterceptors
-        allActionInterceptors.append(contentsOf: action.interceptorList)
+        var allActionInterceptors: [ActionRequestInterceptor] = action.requestInterceptorList
+        allActionInterceptors.append(contentsOf: actionRequestInterceptors)
         
         // 检查ActionInterceptor，如果被中断，则不继续执行
         performActionRequestInterceptor(action: action, with: allActionInterceptors) { result in
@@ -46,7 +46,8 @@ extension DefaultVegaProvider {
     }
     
     private func performActionResponseInterceptor<Input, Output>(action: ActionModel<Input, Output>, result: Result<Output, Error>, completion: ((Result<Output, Error>) -> Void)?) {
-        let allActionInterceptors: [ActionResponseInterceptor] = self.actionResponseInterceptors
+        var allActionInterceptors: [ActionResponseInterceptor] = self.actionResponseInterceptors
+        allActionInterceptors.append(contentsOf: action.responseInterceptorList)
 
         // 检查ActionInterceptor，如果被中断，则不调用completion
         let lastResult = perfromActionResponseInterceptor(action: action, result: result, with: allActionInterceptors)
