@@ -25,6 +25,17 @@ internal class ActionPropertyModel {
         }
     }
     
+    internal init(with source: ActionPropertyModel) {
+        self.baseUrl = source.baseUrl
+        self.path = source.path
+        self.httpMethod = source.httpMethod
+        self.timeout = source.timeout
+        self.retry = source.retry
+        self.httpHeaders = source.httpHeaders
+        self.provider = source.provider
+        self.userInfo = source.userInfo
+    }
+    
     func update(properties: [ActionProperty]) {
         properties.forEach { (property) in
             switch property {

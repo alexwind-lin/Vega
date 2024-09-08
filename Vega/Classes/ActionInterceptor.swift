@@ -40,6 +40,6 @@ public protocol ActionResponseInterceptor {
 }
 
 public protocol ActionRequestInterceptor {
-    /// - returns 如果返回的model为空，则该请求不会被发起，后续流程被终止
+    /// - returns  返回的RequestInterceptResult的state如果是breakdown，则中断后续的interceptor
     func process<Input, Output>(action: ActionModel<Input, Output>, input: Input, completion: @escaping (RequestInterceptResult<Input, Output>) -> Void)
 }

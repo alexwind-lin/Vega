@@ -49,7 +49,7 @@ extension DefaultVegaProvider {
         var allActionInterceptors: [ActionResponseInterceptor] = self.actionResponseInterceptors
         allActionInterceptors.append(contentsOf: action.responseInterceptorList)
 
-        // 检查ActionInterceptor，如果被中断，则不调用completion
+        // 检查ActionInterceptor
         let lastResult = perfromActionResponseInterceptor(action: action, result: result, with: allActionInterceptors)
         completion?(lastResult)
     }

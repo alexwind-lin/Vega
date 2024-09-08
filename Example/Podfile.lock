@@ -1,6 +1,6 @@
 PODS:
   - SweetSugar (1.0.6)
-  - Vega (1.0.4):
+  - Vega (1.1.2):
     - SweetSugar (>= 1.0.6)
 
 DEPENDENCIES:
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   SweetSugar: d1c7d48a53d8dcd9ac929befe8cc4ac3325fc410
-  Vega: 5e5799d2dea41c430f3f75d3d0fb9db7f9543f2a
+  Vega: 0c88ae0303bd1faec90ab89a3dfb20f289775366
 
 PODFILE CHECKSUM: 6e49744c6cc7d4c6c110ac181fb968864cffaa9d
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2

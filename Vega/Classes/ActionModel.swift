@@ -23,7 +23,7 @@ public class ActionModel<Input, Output> {
     }
         
     public init(annotation: ActionAnnotation<Input, Output>) {
-        self.property = annotation.propertyModel
+        self.property = .init(with: annotation.propertyModel)
         self.inputType = annotation.inputType
         self.outputType = annotation.outputType
     }
