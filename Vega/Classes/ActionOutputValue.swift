@@ -2,7 +2,7 @@
 //  ActionOutputBox.swift
 //  Vega
 //
-//  Created by kensou on 2021/6/5.
+//  Created by alex on 2021/6/5.
 //
 
 import Foundation

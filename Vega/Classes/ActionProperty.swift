@@ -2,7 +2,7 @@
 //  ActionProperty.swift
 //  Vega
 //
-//  Created by kensou on 2021/5/29.
+//  Created by alex on 2021/5/29.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  ActionModel+Property.swift
 //  Vega
 //
-//  Created by kensou on 2021/8/16.
+//  Created by alex on 2021/8/16.
 //
 
 public extension ActionModel {

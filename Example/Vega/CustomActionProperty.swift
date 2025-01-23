@@ -2,7 +2,7 @@
 //  CustomActionProperty.swift
 //  Vega_Example
 //
-//  Created by kensou on 2023/8/8.
+//  Created by alex on 2023/8/8.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 

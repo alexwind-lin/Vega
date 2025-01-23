@@ -2,7 +2,7 @@
 //  GHRepository.swift
 //  Vega_Example
 //
-//  Created by kensou on 2021/6/19.
+//  Created by alex on 2021/6/19.
 //  Copyright © 2021 CocoaPods. All rights reserved.
 //
 

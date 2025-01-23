@@ -2,9 +2,6 @@
 //  ViewController.swift
 //  Vega
 //
-//  Created by leon503@163.com on 05/09/2021.
-//  Copyright (c) 2021 leon503@163.com. All rights reserved.
-//
 
 import UIKit
 
