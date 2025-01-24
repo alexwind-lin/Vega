@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ActionAnnotation<Input, Output>: BaseAnnotation {
+open class ActionAnnotation<Input, Output>: BaseAnnotation {
     var appendingProperties: [ActionProperty] = []
     
     func createDefaultActionModel() -> ActionModel<Input, Output> {
@@ -26,15 +26,15 @@ public class ActionAnnotation<Input, Output>: BaseAnnotation {
 }
 
 @propertyWrapper
-public class GET<Input, Output>: ActionAnnotation<Input, Output> {
+open class GET<Input, Output>: ActionAnnotation<Input, Output> {
     typealias Input = Input
     typealias Output = Output
     
-    public var wrappedValue: ActionModel<Input, Output> {
+    open var wrappedValue: ActionModel<Input, Output> {
         return self.createDefaultActionModel()
     }
     
-    public override func customize() {
+    open override func customize() {
         super.customize()
         self.propertyModel.update(properties: [.httpMethod("get")])
     }
@@ -42,15 +42,15 @@ public class GET<Input, Output>: ActionAnnotation<Input, Output> {
 
 
 @propertyWrapper
-public class POST<Input, Output>: ActionAnnotation<Input, Output> {
+open class POST<Input, Output>: ActionAnnotation<Input, Output> {
     typealias Input = Input
     typealias Output = Output
     
-    public var wrappedValue: ActionModel<Input, Output> {
+    open var wrappedValue: ActionModel<Input, Output> {
         return self.createDefaultActionModel()
     }
     
-    public override func customize() {
+    open override func customize() {
         super.customize()
         self.propertyModel.update(properties: [.httpMethod("post")])
     }

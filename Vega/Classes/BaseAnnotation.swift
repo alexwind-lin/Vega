@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class BaseAnnotation {
+open class BaseAnnotation {
     let propertyModel: ActionPropertyModel
     let inputType: ActionInput
     let outputType: ActionOutput
@@ -35,7 +35,7 @@ public class BaseAnnotation {
     }
     
     // 用于子类进行初始化定制
-    public func customize() {
+    open func customize() {
         
     }    
 }

@@ -62,4 +62,10 @@ extension ActionModel {
         self.property.update(properties: [property])
         return self
     }
+    
+    @discardableResult
+    public func updateProperties(_ properties: [ActionProperty]) -> Self {
+        self.property.update(properties: properties)
+        return self
+    }
 }
